@@ -1,1 +1,2 @@
 Video.mp4 is an algorithm working video for real-time location estimation and motion pattern recognition.
+The study utilized multiple datasets. The in-situ rockfall data are available at https://zenodo.org/records/15343138 and https://zenodo.org/records/6393210. The geohazard dataset was sourced from IRIS, and a processed version is available for download at https://zenodo.org/uploads/17707773. The Earthquake datasets are available from http://doi.org/10.13127/instance
