@@ -5,7 +5,6 @@ import os
 import numpy as np
 import matplotlib.pyplot as plt
 from torch.nn.utils import clip_grad_norm_
-from Dataset_maker import datasets,Hitdata,Testdata,Get_alldata
 from TCN import ConvPyramidTCN
 from Dataset_maker2 import read_Timewin,Tesdata
 from torch_geometric.utils import dense_to_sparse
@@ -242,7 +241,7 @@ class EdgeConv_F(nn.Module):
         return out.max(dim=2)[0]
 
 
-class STGNN(nn.Module):
+class MGN(nn.Module):
     def __init__(self, C=3, T=4096, D=64, k=5, num_gc_layers=4, pred_dim=64):
         super().__init__()
         self.temporal = TemporalExtractor(in_channels=C, out_dim=64)
@@ -281,14 +280,12 @@ criterion = nn.CrossEntropyLoss()
 def loss_function(recon_x, x):
     AE=criterion(recon_x,x)
     return AE
-from ROCKnetdatasets import Class_Read
 def train():
 
     batch_size = 100
     device = torch.device('cuda:0')
     B, N, C, T = 20, 19, 3, 600
-    #from Graph_model3 import STGNN1
-    model = STGNN(C=C, T=T, D=64, k=8, num_gc_layers=4, pred_dim=64).to(device)
+    model = MGN(C=C, T=T, D=64, k=8, num_gc_layers=4, pred_dim=64).to(device)
     optimizer = torch.optim.Adam(model.parameters(), lr=3e-4)
 
 
